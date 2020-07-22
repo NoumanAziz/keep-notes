@@ -1,0 +1,19 @@
+
+
+    .auto-form input:-webkit-autofill,
+    .auto-form input:-webkit-autofill:hover, 
+    .auto-form input:-webkit-autofill:focus,
+    .auto-form textarea:-webkit-autofill,
+    .auto-form textarea:-webkit-autofill:hover,
+    .auto-form textarea:-webkit-autofill:focus,
+    .auto-form select:-webkit-autofill,
+    .auto-form select:-webkit-autofill:hover,
+    .auto-form select:-webkit-autofill:focus {
+      border: none;
+      -webkit-text-fill-color: white;
+      box-shadow: none;
+      -webkit-box-shadow: 0 0 0px 1000px rgb(49, 49, 49) inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+    
+

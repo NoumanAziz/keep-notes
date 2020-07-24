@@ -1,4 +1,4 @@
-import firebase from '../../config/firebaseConfig';
+
 import { authActionType } from "./authActionType";
 
 

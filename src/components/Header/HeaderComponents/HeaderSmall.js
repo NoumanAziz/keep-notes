@@ -1,8 +1,8 @@
-import React, {useState , useEffect } from 'react'
+import React, {useState  } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 
-import { IconButton, MenuItem , CircularProgress, Popper, Grow, Paper, ClickAwayListener, MenuList, Avatar  } from '@material-ui/core';
-import {ExitToApp , MoreVert , Brightness4 , Brightness7 } from '@material-ui/icons';
+import { IconButton, MenuItem , Popper, Grow, Paper, ClickAwayListener, MenuList, Avatar  } from '@material-ui/core';
+import {ExitToApp ,Brightness4 , Brightness7 } from '@material-ui/icons';
 import { useStyles } from '../HeaderStyles';
 import { isLoaded  , isEmpty} from 'react-redux-firebase'
 import { signOut } from '../../../redux/authReducer/authAction';
@@ -57,7 +57,7 @@ const renderMobileMenu = (
 
             <MenuList autoFocusItem={isMobileMenuOpen} id="menu-list-grow" className = {classes.headerMenu}>
     
-                <MenuItem  className = {classes.menuFont}>
+                {/* <MenuItem  className = {classes.menuFont}>
                     <IconButton
                       aria-label="account of current user"
                       aria-controls="primary-search-account-menu"
@@ -68,14 +68,14 @@ const renderMobileMenu = (
                     </IconButton>
                     {profile.name}
                   
-                </MenuItem>
+                </MenuItem> */}
                  
    
                 <MenuItem onClick={setTheme}  className = {classes.menuFont}>
                     <IconButton  color="inherit"   >
-                            {darkTheme == 'dark' ? <Brightness7 className = {classes.smaller}/> : <Brightness4 className = {classes.small}/> } 
+                            {darkTheme === 'dark' ? <Brightness7 className = {classes.smaller}/> : <Brightness4 className = {classes.small}/> } 
                     </IconButton>
-                    {darkTheme == 'dark' ? <p>Ligth Mode</p>: <p>Dark Mode</p> } 
+                    {darkTheme === 'dark' ? <p>Ligth Mode</p>: <p>Dark Mode</p> } 
                 </MenuItem>
     
      
@@ -117,12 +117,14 @@ const renderMobileMenu = (
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreVert />
+
+            <Avatar alt={profile.name} src={profile.photoURL} className={classes.med} /> 
+              
             </IconButton>
          
           :
           <IconButton  color="inherit" onClick={setTheme} >
-                            {darkTheme == 'dark' ? <Brightness7 /> : <Brightness4 /> } 
+                            {darkTheme === 'dark' ? <Brightness7 /> : <Brightness4 /> } 
                     </IconButton>
           }
 
@@ -133,3 +135,7 @@ const renderMobileMenu = (
   };
   
   export default HeaderSmall;
+
+
+
+  // <MoreVert />

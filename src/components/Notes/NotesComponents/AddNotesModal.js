@@ -1,17 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal, Backdrop, Button, InputBase, Box, IconButton } from "@material-ui/core";
 import PropTypes from 'prop-types';
-import { useSpring, animated } from 'react-spring/web.cjs';
 import notesStyles from "./notesStyles";
 import DeleteIcon from '@material-ui/icons/Delete';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import { PinFilled, PinUnfilled } from "../../pinIcons/PinIcon";
 import { useDispatch } from "react-redux";
-import { createNotes, updateNote } from "../../../redux/notes/notesfirestoreActions";
+import { createNotes, updateNote, delfromNotes } from "../../../redux/notes/notesfirestoreActions";
 import NotesCardColorMenu from "./NotesCardColorMenu";
 import clsx from  'clsx';
 
 const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , noteBgColor , update ,id , ...props}) => {
+
+  const notesId = `${Date.now()}${Math.floor(Math.random()*100)}`;
+  
 
   const [note , setNote] = useState({
                                   title : noteTitle ? noteTitle : ''  ,
@@ -60,7 +62,7 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
     event.preventDefault();
 
 
-    if(  title || discrp)  {
+    if(  title.trim() || discrp.trim())  {
 
             if (update) {
 
@@ -77,7 +79,7 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
                           if (bgColor!==noteBgColor)  { obj['bgColor'] =bgColor } 
 
                           dispatch(updateNote(id , obj))
-                          console.log('need to update ' , obj )
+                         
                   }
 
             }
@@ -88,6 +90,7 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
                                         discrp ,
                                         pinned,
                                         bgColor,
+                                        id : notesId,
                                       }))
 
             }
@@ -97,7 +100,10 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
   }
 
 
-
+const deleteFromNotes = () => {
+  closeModal() ;
+  dispatch(updateNote(id , {deleted:true}));
+}
 
   const handleChange = (event) => {
     
@@ -106,7 +112,7 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
               ...note,
               [name] : value
           })
-          console.log ('valueee' ,name , value)
+      
   }
 
   const onClose = (e) =>{
@@ -132,6 +138,26 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
   const handleColorMenuClose = () => {
     setColorAnchorEl(null);
   };
+
+
+
+  const [mobColorAnchorEl, setMobColorAnchorEl] = useState(null);
+
+
+  const isMobColorMenuOpen = Boolean(mobColorAnchorEl);
+
+  const handleMobColorMenuOpen = (event) => {
+
+    setMobColorAnchorEl(event.currentTarget);
+  };
+  
+
+  const handleMobColorMenuClose = () => {
+    setMobColorAnchorEl(null);
+  };
+
+
+
 
   const handleBgColor = (color) => {
     setBgColor(color)
@@ -209,20 +235,27 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
         </div>
           
           <div className = {classes.modalControlButtons}>
-          <IconButton aria-label="settings"  onClick = {handleColorMenuOpen} onMouseEnter = {handleColorMenuOpen} onMouseLeave = {handleColorMenuClose} >
-            <ColorLensIcon fontSize = 'small' />  
-            <NotesCardColorMenu isColorMenuOpen = {isColorMenuOpen} colorAnchorEl = {colorAnchorEl} handleColorMenuClose = {handleColorMenuClose}  handleBgColor = {handleBgColor} modal = {true}/>
-          </IconButton>
-          
-          { update &&
-          <IconButton aria-label="settings">
-            <DeleteIcon fontSize = 'small' />
-          </IconButton> }
+            
+          <IconButton aria-label="settings"   onMouseEnter = {handleColorMenuOpen} className = {classes.cardIconButtonColorModal} onMouseLeave = {handleColorMenuClose} >
+                              <ColorLensIcon fontSize = 'small' />  
+                              <NotesCardColorMenu  modal = {true} isColorMenuOpen = {isColorMenuOpen} colorAnchorEl = {colorAnchorEl} handleBgColor = {handleBgColor} handleColorMenuClose = {handleColorMenuClose} />
+                            </IconButton>
 
+                            <IconButton aria-label="settings"  onClick = {handleMobColorMenuOpen} className = {classes.cardIconButtonColorMobModal} >
+                            <NotesCardColorMenu modal = {true} isColorMenuOpen = {isMobColorMenuOpen} colorAnchorEl = {mobColorAnchorEl} handleBgColor = {handleBgColor} handleColorMenuClose = {handleMobColorMenuClose} />
+                              <ColorLensIcon fontSize = 'small'  />  
+                            </IconButton>
+         
           {update ? 
+          <>
+            <IconButton aria-label="settings"  onClick = {deleteFromNotes} >
+                <DeleteIcon fontSize = 'small' />
+            </IconButton>
+
             <Button size = 'small' onClick = {onClose} className={classes.cancelBtn}>
                 Update
             </Button>
+          </>
           :
 
           <Button size = 'small' onClick = {onClose} className={classes.cancelBtn}>

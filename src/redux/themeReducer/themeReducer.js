@@ -8,7 +8,7 @@ const themeReducer = (state = iState , action) => {
         case 'THEME_TOGGLER':
             return {
                 ...state,
-                currentTheme : state.currentTheme == 'dark' ? 'light' : 'dark'
+                currentTheme : state.currentTheme === 'dark' ? 'light' : 'dark'
             }
     
         default:

@@ -1,8 +1,8 @@
-import React, {useState , useEffect } from 'react'
+import React, {useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 
-import {  IconButton, MenuItem , CircularProgress, Popper, Grow, Paper, ClickAwayListener, MenuList, Avatar  } from '@material-ui/core';
-import {ExitToApp , MoreVert , Brightness4 , Brightness7, AccountCircle } from '@material-ui/icons';
+import {  IconButton, MenuItem , Popper, Grow, Paper, ClickAwayListener, MenuList, Avatar  } from '@material-ui/core';
+import {ExitToApp  , Brightness4 , Brightness7,  } from '@material-ui/icons';
 import { useStyles } from '../HeaderStyles';
 import { isLoaded  , isEmpty} from 'react-redux-firebase'
 import { signOut } from '../../../redux/authReducer/authAction';
@@ -12,7 +12,7 @@ const HeaderDesktop = ({setTheme}) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
   const darkTheme = useSelector(state=>state.theme.currentTheme);
-  console.log('darktheme reducer ', darkTheme)
+ 
 
     const isMenuOpen = Boolean(anchorEl);
   
@@ -74,7 +74,7 @@ const HeaderDesktop = ({setTheme}) => {
         <div>
         <div className={classes.sectionDesktop}>
         <IconButton  color="inherit" onClick={setTheme}>
-             {darkTheme == 'dark' ? <Brightness7 /> : <Brightness4 /> } 
+             {darkTheme === 'dark' ? <Brightness7 /> : <Brightness4 /> } 
           </IconButton>
 
           {isLoaded(auth) && !isEmpty(auth) ?

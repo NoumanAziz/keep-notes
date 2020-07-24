@@ -1,11 +1,11 @@
 import React from 'react';
 import { isLoaded  , isEmpty} from 'react-redux-firebase'
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 
-const SecuredRoute = ({ children, name , auth , ...rest }) =>{
-
+const SecuredRoute = ({ children, name  , ...rest }) =>{
+const auth = useSelector(state=>state.firebase.auth)
     switch (name) {
       case "signedout":
         return (
@@ -17,7 +17,7 @@ const SecuredRoute = ({ children, name , auth , ...rest }) =>{
               ) : (
                 <Redirect
                   to={{
-                    pathname: '/signin',
+                    pathname: '/notes/accounts',
                     state: { from: location }
                   }}
                 />
@@ -34,7 +34,7 @@ const SecuredRoute = ({ children, name , auth , ...rest }) =>{
                 isLoaded(auth) && !isEmpty(auth) ? (
                   <Redirect
                     to={{
-                      pathname: '/',
+                      pathname: '/notes',
                       state: { from: location }
                     }}
                   />
@@ -51,10 +51,8 @@ const SecuredRoute = ({ children, name , auth , ...rest }) =>{
 
   }
 
-  const mapStateToProps = state => ({
-      auth : state.firebase.auth
-  })
-  export default connect(mapStateToProps)(SecuredRoute);
+
+  export default SecuredRoute;
 
 
 

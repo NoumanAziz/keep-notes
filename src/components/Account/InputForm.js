@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, withStyles, makeStyles, fade, createMuiTheme } from '@material-ui/core';
+import { TextField, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import './inputForm.css'
 
@@ -18,14 +18,14 @@ const validate  = (name ,value)=>{
         formValidate(nameError , '');
             switch (name) {
                 case 'email':
-                    console.log('email case switch');
+                   
                     const emailRegex = RegExp(
                         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                       );
                     !(emailRegex.test(value)) && formValidate(nameError , "* invalid Email address")
                     break;
                 case 'password':
-                    console.log('password case switch');
+                
                     const passwordRegex = RegExp(
                         /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{7,32}$/
                       );
@@ -34,7 +34,7 @@ const validate  = (name ,value)=>{
                     break
                 case 'confirmPassword':
                     
-                    console.log('Confirm password case switch');
+              
                     formValidate('', 'passwords do not match',value )
                     break
                 default:

@@ -14,7 +14,7 @@ import notesStyles from './notesStyles';
 import { PinFilled , PinUnfilled}  from '../../pinIcons/PinIcon';
 import NotesCardColorMenu from './NotesCardColorMenu';
 import { useDispatch } from 'react-redux';
-import { deleteNotes, addTrash, delfromNotes, updateNote, restore } from '../../../redux/notes/notesfirestoreActions';
+import { delfromNotes, updateNote, restore } from '../../../redux/notes/notesfirestoreActions';
 
 
 
@@ -54,7 +54,7 @@ const NotesCard = ({trash , note}) => {
   const isColorMenuOpen = Boolean(colorAnchorEl);
 
   const handleColorMenuOpen = (event) => {
-    console.log('event in color menu ' , event)
+
     setColorAnchorEl(event.currentTarget);
   };
   
@@ -62,6 +62,24 @@ const NotesCard = ({trash , note}) => {
   const handleColorMenuClose = () => {
     setColorAnchorEl(null);
   };
+
+
+
+  const [mobColorAnchorEl, setMobColorAnchorEl] = useState(null);
+
+
+  const isMobColorMenuOpen = Boolean(mobColorAnchorEl);
+
+  const handleMobColorMenuOpen = (event) => {
+
+    setMobColorAnchorEl(event.currentTarget);
+  };
+  
+
+  const handleMobColorMenuClose = () => {
+    setMobColorAnchorEl(null);
+  };
+
 
 
  const handleBgColor = (color) => {
@@ -128,11 +146,13 @@ const NotesCard = ({trash , note}) => {
                           <div className = {classes.notesCardButtons}>
                             <div className = {classes.extraCardDiv} onClick = {openModal}></div>
 
-                            <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>{ dispatch(deleteNotes(id)) ; dispatch(restore(note))}}>
+                            {/* <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>{ dispatch(deleteNotes(id)) ; dispatch(restore(note))}}> */}
+                            <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>dispatch(updateNote(id , {deleted : false , createdAt : new Date () ,  editedAt : new Date()}))}>
                               <RestoreFromTrashIcon fontSize = 'small' />  
                             </IconButton>
                               
-                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=> dispatch(deleteNotes(id))} >
+                            {/* <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=> dispatch(deleteNotes(id))} > */}
+                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=> dispatch(delfromNotes(note))} >
                               <DeleteForeverIcon fontSize = 'small'/>
                             </IconButton>
 
@@ -146,12 +166,13 @@ const NotesCard = ({trash , note}) => {
                               <NotesCardColorMenu isColorMenuOpen = {isColorMenuOpen} colorAnchorEl = {colorAnchorEl} handleBgColor = {handleBgColor} handleColorMenuClose = {handleColorMenuClose} />
                             </IconButton>
 
-                            <IconButton aria-label="settings"  onClick = {handleColorMenuOpen} className = {classes.cardIconButtonColorMob} >
+                            <IconButton aria-label="settings"  onClick = {handleMobColorMenuOpen} className = {classes.cardIconButtonColorMob} >
                               <ColorLensIcon fontSize = 'small'  />  
-                              <NotesCardColorMenu isColorMenuOpen = {isColorMenuOpen} colorAnchorEl = {colorAnchorEl} handleBgColor = {handleBgColor} handleColorMenuClose = {handleColorMenuClose} />
                             </IconButton>
                               
-                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=>{ dispatch(delfromNotes(note)) ; dispatch(addTrash(note)) }} >
+                            {/* <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=>{ dispatch(delfromNotes(note)) ; dispatch(addTrash(note)) }} > */}
+                           
+                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = { ()=>dispatch(updateNote(id , {deleted : true})) } >
                               <DeleteIcon fontSize = 'small'/>
                             </IconButton>
                           </div>
@@ -162,6 +183,8 @@ const NotesCard = ({trash , note}) => {
        
 
       </Box>
+      <NotesCardColorMenu isColorMenuOpen = {isMobColorMenuOpen} colorAnchorEl = {mobColorAnchorEl} handleBgColor = {handleBgColor} handleColorMenuClose = {handleMobColorMenuClose} />
+
   
     <AddNotesModal closeModal = {closeModal} open = {open}  
                 id = {id}  noteTitle = {title}  noteDiscrp = {discrp}  notePinned = {pinned} noteBgColor = {bgColor} update = {true} />

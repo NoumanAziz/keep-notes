@@ -14,7 +14,8 @@ import DeleteSweepSharpIcon from '@material-ui/icons/DeleteSweepSharp';
 import { useStyles } from '../HeaderStyles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { PinFilled } from '../../pinIcons/PinIcon';
-import { Link } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
+
 
 
 
@@ -23,11 +24,10 @@ import { Link } from 'react-router-dom';
 const HeaderSideDrawer = ({open , handleDrawerClose ,mouseOpen, handleMouseDrawerOpen , handleMouseDrawerClose , history}) => {
     const classes = useStyles();
 
-console.log('openn' , open)
-console.log ('mouse ' , mouseOpen)
+
 
 const drawerOpener = open || mouseOpen ? true : false
-console.log('drawer open' , drawerOpener);
+
 
   return (
    
@@ -45,35 +45,37 @@ console.log('drawer open' , drawerOpener);
             [classes.drawerClose]: !drawerOpener ,
           }),
         }}
+
+       
       >
         
-        <IconButton  >
-            <ChevronRightIcon fontSize = 'small' /> 
+        <IconButton className = {classes.extraIcon}  >
+            <ChevronRightIcon fontSize = 'small'  /> 
           </IconButton >
        
-          <br/>
+          <Divider/>
          
         <List onClick = {handleMouseDrawerClose} >
 
-            <ListItem button  onClick = {()=>history.push('/')} >
-                <ListItemIcon className = {classes.drawerListItem}  onMouseEnter = {handleMouseDrawerOpen} >
+            <ListItem button  onClick = {()=>history.push('/notes')} onMouseEnter = {handleMouseDrawerOpen} >
+                <ListItemIcon className = {classes.drawerListItem}  >
                   <NotesOutlinedIcon size = 'small' /> 
                 </ListItemIcon>
-            <ListItemText primary= 'Notes' /></ListItem>
+            <ListItemText primary ={ <p className = {classes.listItemText}>Notes</p>  }  /></ListItem>
            
             
-            <ListItem button >
-                <ListItemIcon className = {classes.drawerListItem}  onMouseEnter = {handleMouseDrawerOpen} >
+            <ListItem button  onClick = {()=>history.push('/pinned')} onMouseEnter = {handleMouseDrawerOpen}>
+                <ListItemIcon className = {classes.drawerListItem}  >
                   <PinFilled /> 
                 </ListItemIcon>
-            <ListItemText primary= 'Pinned' /></ListItem>
+            <ListItemText primary ={ <p className = {classes.listItemText}>Pinned</p>  }  /></ListItem>
 
            
-            <ListItem button onClick = {()=>history.push('/trash')} >
-                <ListItemIcon className = {classes.drawerListItem}  onMouseEnter = {handleMouseDrawerOpen} >
+            <ListItem button onClick = {()=>history.push('/trash')} onMouseEnter = {handleMouseDrawerOpen} >
+                <ListItemIcon className = {classes.drawerListItem} >
                   <DeleteSweepSharpIcon size = 'small' /> 
                 </ListItemIcon>
-            <ListItemText primary= 'Trash' /></ListItem>
+            <ListItemText primary = {<p className = {classes.listItemText}>Trash</p>  }   /></ListItem>
            
 
         </List>

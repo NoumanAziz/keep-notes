@@ -10,7 +10,7 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ['firebase','firestore' , 'theme'] // only navigation will be persisted
+    whitelist: ['firebase','firestore' , 'theme', 'mobLayout'] // only navigation will be persisted
   };
 
   const persistedReducer = persistReducer(persistConfig, rootReducer)

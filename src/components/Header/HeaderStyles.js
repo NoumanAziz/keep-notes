@@ -1,8 +1,6 @@
-import {  fade, makeStyles, useTheme  } from '@material-ui/core';
-import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
+import {  fade, makeStyles } from '@material-ui/core';
+
 const drawerWidth = 240;
-// const theme = useTheme();
 export const useStyles = makeStyles((theme) => ({
 
     grow: {
@@ -56,6 +54,18 @@ export const useStyles = makeStyles((theme) => ({
       },
     },
 
+    layoutIcon: {
+      display : 'none',
+      [theme.breakpoints.down('xs')]: {
+        display: 'block',
+        width: theme.spacing(2.5),
+      height: theme.spacing(2.5),
+      marginLeft: theme.spacing(1),
+      },
+      
+    },
+
+
     smaller: {
       width: theme.spacing(2.5),
       height: theme.spacing(2.5),
@@ -66,63 +76,77 @@ export const useStyles = makeStyles((theme) => ({
     },
 
     med: {
-      width: theme.spacing(4),
-      height: theme.spacing(4),
+      width: theme.spacing(3.8),
+      height: theme.spacing(3.8),
     },
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
+   
       margin : '0px auto',
 
-      width : '70%' ,
+      width : '65%' ,
 
 [theme.breakpoints.up('md')] : {
     marginRight: theme.spacing(0),
     marginLeft:theme.spacing(1) ,
 } ,
 [theme.breakpoints.down('sm')] : {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
     marginLeft:theme.spacing(1) ,
-    width : '90%',
-}
+    width : '60%',
+},
+    '&:hover': {
+  backgroundColor: fade(theme.palette.common.white, 0.25),
+},
 
+'&:focus': {
+  backgroundColor: fade(theme.palette.common.white, 0.25),
+},
 
       //   [theme.breakpoints.up('sm')]: {
     //     marginLeft: theme.spacing(3),
     //   },
     },
     searchIcon: {
-      padding: theme.spacing(0, 2),
+    
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+        padding: theme.spacing(0, 2),
       height: '100%',
       position: 'absolute',
       pointerEvents: 'none',
-      display: 'flex',
       alignItems: 'center',
+      
       justifyContent: 'center',
+      },
     },
     inputRoot: {
       color: 'inherit',
       width : '100%'
     },
     inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
+      padding: theme.spacing(1, 1, 1, ),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(0)}px)`,
       transition: theme.transitions.create('width'),
       width: '100%',
+     
+   
       [theme.breakpoints.up('md')]: {
         width: '100%',
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        margin : '0 auto',
       },
     },
     sectionDesktop: {
       display: 'none',
       [theme.breakpoints.up('md')]: {
         display: 'flex',
+      
+        width : 'fit-conteent',
       },
     },
     sectionMobile: {
@@ -159,6 +183,7 @@ export const useStyles = makeStyles((theme) => ({
   drawer: {
     
     width: drawerWidth,
+    // overflowX : 'hidden',
     flexShrink: 0,
     whiteSpace: 'nowrap',
     [theme.breakpoints.down('xs')] : {
@@ -167,19 +192,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     
-    width: drawerWidth,
+    width: 200,
+    
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      // duration: theme.transitions.duration.enteringScreen,
+      duration: 30,
     }),
     [theme.breakpoints.down('xs')] : {
-      width : 190,
+      width : 170,
       },
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      // duration: theme.transitions.duration.leavingScreen,
+       duration: 20,
     }),
     backgroundColor : 'rgba(88, 87, 87, 0)',
     border : 'none',
@@ -192,12 +220,42 @@ export const useStyles = makeStyles((theme) => ({
       width: theme.spacing(0),
   },
   },
+  extraIcon:{
+    [theme.breakpoints.up('xs')]: {
+      margin : '0px 0px 19.5px 0px ',
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      margin : '0px 0px 12px 0px ',
+    },
+
+  },
   drawerListItem:{
-    padding : '0px 5px 0px 5px ',
+    [theme.breakpoints.up('sm')]: {
+      padding : '0px 5px 0px 5px ',
+      margin : '0px',
+    },
 
     [theme.breakpoints.down('sm')]: {
       padding : '0px 3px',
+      margin : '0px',
     },
+    [theme.breakpoints.down('xs')]: {
+      padding : '0px 2px',
+      margin : '0px'
+    },
+
+  },
+
+  listItemText :{
+   
+    padding : '0px',
+    margin : '0px',
+
+    // [theme.breakpoints.down('sm')]: {
+      fontSize : '15px',
+      fontWeigth : '200',
+    
 
   },
   toolbar: {

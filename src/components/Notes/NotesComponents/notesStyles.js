@@ -10,11 +10,13 @@ const notesStyles = makeStyles ((theme) => ({
         padding : theme.spacing(0),
         borderTop : theme.palette.background.cardBorder,
         width : '100%',
-      
+        [theme.breakpoints.down('xs')] : {
+          margin : theme.spacing(7 , 0 , 0 , 0),
+            },
     },
     notesRoot : {
         margin : "0 auto",
-        
+        textAlign : 'center' ,
        
 
         [theme.breakpoints.up('xs')] : {
@@ -26,6 +28,14 @@ const notesStyles = makeStyles ((theme) => ({
         padding : theme.spacing(4 , 2),
         width : '96%',
           },
+      
+    },
+
+    trashText : {
+      fontStyle : 'italic',
+      fontWeight : 300,
+      fontSize : '18px',
+      color :  theme.palette.background.cardFontColor,
       
     },
 
@@ -63,6 +73,7 @@ const notesStyles = makeStyles ((theme) => ({
               // width : '100%',
               
                  },
+                
           
               [theme.breakpoints.down('sm')] : {
                 padding : '2px 2px',
@@ -78,7 +89,8 @@ const notesStyles = makeStyles ((theme) => ({
           },
 
           masonryGridColumn : {
-            paddingLeft: '0',
+            paddingLeft: '0px',
+            
               
           
           },
@@ -110,27 +122,25 @@ const notesStyles = makeStyles ((theme) => ({
 
     notesCardBox : {
       // overflowWrap: 'normal',
-      minWidth: 210,
+      // minWidth: 210,
       backgroundColor: theme.palette.background.modalpaper,
       border : theme.palette.background.cardBorder,
       borderRadius: '6px',
       padding: theme.spacing(0),
       
 
-      [theme.breakpoints.up('sm')] : {
-        // width : 250,
-        // backgroundColor : '#00000000',
-      },
-      [theme.breakpoints.up('xs')] : {
-        // width : 235,
-        // backgroundColor : '#00000000',
-      },
-
-     
-
+      // [theme.breakpoints.up('sm')] : {
+      //   // width : 250,
+      //   // backgroundColor : '#00000000',
+      // },
+      // [theme.breakpoints.up('xs')] : {
+      //   minWidth : 210,
+        
+      // },
         [theme.breakpoints.down('xs')] : {
-            // width : '100%',
-        },
+             // width : '100%',
+             minWidth : '100px',
+         },
   
         '&:hover': {
           '& $carPinIcon' : {
@@ -388,7 +398,35 @@ modal: {
    display : 'flex',
    justifyContent : 'flex-end',
  },
+ 
 
+ cardIconButtonColorMobModal : {
+      
+  display : 'none',
+   
+   [theme.breakpoints.down('xs')] : {
+     display : 'block',
+     
+     opacity : '1',
+   
+ },
+ 
+
+ },
+
+
+ cardIconButtonColorModal : {
+ 
+   [theme.breakpoints.down('xs')] : {
+     display : 'none',
+ },
+  
+ },
+
+
+
+
+ 
 // backdropstyle : {
 //     opacity 
 // },
@@ -589,6 +627,81 @@ colorsGrey: {
     border : `.7px solid ${theme.palette.background.colorMenuBorder} `,
   },
 },
+
+
+searchPageColorPaper: {
+    maxWidth: '85%',
+    width : 'fit-content',
+    minWidth : '60%',
+    margin : "0px  auto", 
+    textAlign : 'left',
+  alignContent : 'center',
+  padding : '14px 7px',
+
+},
+
+colorText : {
+  margin : "0 24px 6px 24px",
+  [theme.breakpoints.down('md')] : {
+    margin : "0 19px 6px 19px",
+    },
+
+  [theme.breakpoints.down('sm')] : {
+    margin : "0 14px 6px 14px",
+    },
+
+  [theme.breakpoints.down('xs')] : {
+    margin : "0 9px 6px 9px",
+    },
+  
+},
+
+colorsCircleBox:{
+
+ 
+  padding : '0px',
+  width : '100%',
+  display : 'flex',
+  flexWrap : 'wrap',
+  margin : "0px  auto", 
+  
+
+},
+
+colorsCircle: {
+  borderRadius : '50%',
+  border : theme.palette.background.cardBorder,
+  cursor : 'pointer',
+  [theme.breakpoints.up('md')] : {
+    
+  width : '76px',
+  height : '76px',  
+  margin : '8px',
+  },
+
+  [theme.breakpoints.down('md')] : {
+    width : '62px',
+    height : '62px',  
+    margin : '7px',
+    },
+
+    [theme.breakpoints.down('sm')] : {
+      width : '50px',
+      height : '50px',  
+      margin : '6px',
+      },
+
+      [theme.breakpoints.down('xs')] : {
+        width : '37px',
+        height : '37px',  
+        margin : '5px',
+        },
+  '&:hover': {
+    opacity : '0.9',
+    border : `.7px solid ${theme.palette.background.colorMenuBorder} `,
+  },
+},
+
 
 
 

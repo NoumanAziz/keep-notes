@@ -11,7 +11,7 @@ const NotesCardColorMenu = ({isColorMenuOpen , colorAnchorEl , handleColorMenuCl
             
                     <Paper 
                                 style = {{                                
-                                    transform:  modal ? 'translateX(-108%) translateY(-76%)' : 'translateX(-100%) translateY(-121%)',
+                                    transform:  modal ? 'translateX(5%) translateY(-92%)' : 'translateX(-100%) translateY(-121%)',
 
                                     position : "fixed",
 

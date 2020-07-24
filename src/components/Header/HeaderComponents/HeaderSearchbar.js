@@ -1,34 +1,54 @@
-import React, {useState , useEffect } from 'react'
-import {useSelector} from 'react-redux'
+import React, {useState } from 'react'
 import { useStyles } from '../HeaderStyles';
 import { InputBase } from '@material-ui/core';
 import {Search } from '@material-ui/icons';
+import { withRouter } from 'react-router-dom';
 
 
 
-const HeaderSearchbar = () => {
+const HeaderSearchbar = ({history}) => {
     const classes = useStyles();
+    const [string , setString] = useState('')
+
+const handleChange = (event) => {
+  setString(event.target.value)
+  event.persist()
+  setTimeout(() => (
+    history.push(`/search${event.target.value}`)
+  ), 1000);
+
+}
+
+
+
     return (
 
          <div className={classes.search}>
-             <div className={classes.sectionDesktop}>
+            
           <div className={classes.searchIcon}>
             <Search />
             </div>
-          </div>
-          <InputBase 
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
+          
+
+            <InputBase onClick = {()=>history.push('/search')}
+                placeholder="Search…"
+                classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+             
             }}
+            value = {string}
+            name = 'string'
+            onChange = {handleChange}
+            autoComplete = "off"
             inputProps={{ 'aria-label': 'search' }}
+
           />
         </div>    
     );
 };
 
-export default HeaderSearchbar;
+export default withRouter(HeaderSearchbar);
 
 
 

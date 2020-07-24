@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import NotesCard from './NotesCard';
 import notesStyles from './notesStyles';
@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import moment from 'moment';
 import Masonry from 'react-masonry-css'
+import { withRouter } from 'react-router-dom';
 
 
-const NotesList = ({trash}) => {
+const NotesList = ({match}) => {
 
     const classes = notesStyles();
     const userId = useSelector(state => state.firebase.auth.uid)
@@ -31,33 +32,71 @@ const NotesList = ({trash}) => {
       600: 1
     };
 
+    const [pinned , setPinned] = useState( match.params.category == 'pinned' ? true : false) 
+    const [trash , setTrash] = useState( match.params.category == 'trash' ? true : false) 
+
+
+    useEffect(() => {
+      if ( match.params.category == 'pinned') {
+              setPinned(true)
+              setTrash(false)
+      }
+       
+      if (match.params.category == 'trash') {
+         setTrash(true)
+         setPinned(false)
+      }
+      if (match.params.category == 'notes') {
+        setTrash(false)
+        setPinned(false)
+     }
+
+      }, [match.params.category])    
+     
 
 
     return (
       <>
               { trash ? 
-                
+                  <>
+                  
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
                     className= {classes.masonryGrid}
                     columnClassName={classes.masonryGridColumn}>
 
                         {trashNotes && trashNotes.map(note =>
-                        <NotesCard key = {note.id} note = {note} trash = {trash}/>
+                        <NotesCard key = {note.id} note = {note} trash = {true}/>
                         )} 
 
                   </Masonry>
+                  </>
                 :
+                <>
+                  {pinned ? 
+                  <Masonry
+                    breakpointCols={breakpointColumnsObj}
+                    className= {classes.masonryGrid}
+                    columnClassName={classes.masonryGridColumn}>
+                  
+                        {notes && notes.map(note => note.pinned ? 
+                        <NotesCard key = {note.id} note = {note} trash = {false} /> : null
+                        )}
+
+                  </Masonry>
+                  :
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
                     className= {classes.masonryGrid}
                     columnClassName={classes.masonryGridColumn}>
                   
                         {notes && notes.map(note =>
-                        <NotesCard key = {note.id} note = {note} trash = {trash}/>
+                        <NotesCard key = {note.id} note = {note} trash = {false}/>
                         )}
 
                   </Masonry>
+                  }
+                </>
               }
          
       </>
@@ -65,7 +104,7 @@ const NotesList = ({trash}) => {
     );
 };
 
-export default NotesList;
+export default withRouter(NotesList);
 
 
 

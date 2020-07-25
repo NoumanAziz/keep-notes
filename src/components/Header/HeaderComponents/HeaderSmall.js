@@ -118,7 +118,7 @@ const renderMobileMenu = (
               color="inherit"
             >
 
-            <Avatar alt={profile.name} src={profile.photoURL} className={classes.med} /> 
+            <Avatar classes = {{img : classes.small , root : classes.small}}   src={profile.photoURL}  alt={profile.name}/> 
               
             </IconButton>
          

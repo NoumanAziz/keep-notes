@@ -71,8 +71,9 @@ export const useStyles = makeStyles((theme) => ({
       height: theme.spacing(2.5),
     },
     small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
+      width:'30px',
+      height: '30px',
+      borderRadius : '50%',
     },
 
     med: {
@@ -125,19 +126,24 @@ export const useStyles = makeStyles((theme) => ({
     },
     inputRoot: {
       color: 'inherit',
-      width : '100%'
+      width : '100%',
+      paddingLeft: '15px',
+      [theme.breakpoints.up('md')]: {
+      
+      padding : '0px 0px 0px 47px '
+      },
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, ),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(0)}px)`,
+     
       transition: theme.transitions.create('width'),
       width: '100%',
      
    
       [theme.breakpoints.up('md')]: {
         width: '100%',
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        // paddingLeft: '48px',
         margin : '0 auto',
       },
     },
@@ -190,6 +196,11 @@ export const useStyles = makeStyles((theme) => ({
       width : 200,
       },
   },
+
+  drwaerBorder : {
+      border : 'none',
+  },
+
   drawerOpen: {
     
     width: 200,
@@ -210,14 +221,16 @@ export const useStyles = makeStyles((theme) => ({
        duration: 20,
     }),
     backgroundColor : 'rgba(88, 87, 87, 0)',
-    border : 'none',
+    border : '#00000000',
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
+      border : '#00000000',
       width: theme.spacing(8) + 1,
     },
     [theme.breakpoints.down('xs')] : {
       width: theme.spacing(0),
+      border : '#00000000',
   },
   },
   extraIcon:{

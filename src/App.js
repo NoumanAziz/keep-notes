@@ -116,20 +116,20 @@ const App = () => {
 
  
       <Header callback = {setTheme} /> 
-  <AuthIsLoaded>
+      <AuthIsLoaded>
  
-   <Switch>
+     <Switch>
       <SecuredLinks exact path = '/:category' name = 'signedout'    > 
                  <Notes/>
-           </SecuredLinks>
+     </SecuredLinks>
 
       <Route exact path="/">
             <Redirect to="/notes" />
       </Route>
 
-           <SecuredLinks exact path = '/notes/accounts' name = 'signedin'> 
-                 <Account/>
-           </SecuredLinks>
+       <SecuredLinks exact path = '/notes/accounts' name = 'signedin'> 
+         <Account/>
+       </SecuredLinks>
 
     
     </Switch>

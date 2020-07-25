@@ -2,6 +2,7 @@
   "name": "my-notes",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://NoumanAziz.github.io/keep-notes",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
@@ -14,6 +15,7 @@
     "@testing-library/user-event": "^7.1.2",
     "clsx": "^1.1.1",
     "firebase": "^7.10.0",
+    "gh-pages": "^3.1.0",
     "logger": "0.0.1",
     "moment": "^2.27.0",
     "react": "^16.13.0",
@@ -36,7 +38,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy" : "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

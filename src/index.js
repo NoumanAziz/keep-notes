@@ -6,7 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { store, persistor } from './redux/Store';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import firebase from './config/firebaseConfig'
@@ -33,11 +33,11 @@ const rrfProps = {
 ReactDOM.render(
     <Provider store = {store}>
         <PersistGate loading={null} persistor={persistor}>
-            <BrowserRouter>
+            <HashRouter basename = "keep-notes">
                 <ReactReduxFirebaseProvider {...rrfProps}>
                     <App/>
                 </ReactReduxFirebaseProvider>
-            </BrowserRouter>
+            </HashRouter>
         </PersistGate>
     </Provider>
     , document.getElementById('root'));

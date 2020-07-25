@@ -40,7 +40,7 @@ const drawerOpener = open || mouseOpen ? true : false
           [classes.drawerClose]: !drawerOpener ,
         })}
         classes={{
-          paper: clsx({
+          paper: clsx(   classes.drwaerBorder, {
             [classes.drawerOpen]: drawerOpener ,
             [classes.drawerClose]: !drawerOpener ,
           }),

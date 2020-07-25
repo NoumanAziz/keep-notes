@@ -6,7 +6,7 @@ import { accountStyles } from './AccountStyles';
 import { useDispatch } from 'react-redux';
 import { googleSignin } from '../../redux/authReducer/authAction';
 import { AccountCircle } from '@material-ui/icons';
-
+import notes from './notes.png';
 
 
 const Account = () => {
@@ -22,8 +22,9 @@ const Account = () => {
         
       <Container className = {classes.accountContainer}>
           <div className={classes.accountDiv}>
+         
         
-            <img src="/my-notes.png" alt = 'app' className= {classes.notesLogo} />
+            <img src= {notes} alt = 'app' className= {classes.notesLogo} />
 
             <Typography className = {classes.titleText} variant="h4" >Save your Notes</Typography>
             

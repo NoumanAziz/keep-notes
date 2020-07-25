@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import InputForm from './InputForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../redux/authReducer/authAction';
 import { Container, Typography, Button } from '@material-ui/core';
 import { formStyles } from './AccountStyles';
@@ -16,6 +16,7 @@ import { formStyles } from './AccountStyles';
     })
 
     const dispatch = useDispatch();
+    const authErr = useSelector(state => state.auth.authErr)
     const {email , password ,  emailError , passwordError} =form;
 
    const handleSubmit = (event) => {
@@ -69,7 +70,7 @@ import { formStyles } from './AccountStyles';
                         error = {emailError}
                         formValidate = {validate}
                         errorNull = {errorNull}
-                        autoFocus
+                        
                     /> 
                     <InputForm
                         type = 'password'
@@ -81,11 +82,13 @@ import { formStyles } from './AccountStyles';
                         formValidate = {validate}
                         errorNull = {errorNull}
                     /> 
+                    {authErr ? <span style = {{ color : 'red' , margin : '0 0 0 4px', fontStyle : 'italic'}}>{authErr}</span> : null}
+
                     <Button fullWidth variant="contained" type="submit" style={{backgroundColor:'#95c436' , color : 'white'}} >Login in</Button>
                 </form>
                     
                     <Typography variant="subtitle2" style={{padding : '10px 0px'}} >
-                        New to My Notes App ?  
+                        New to Notes App ?  
                         <a style={{color : '#08adad' , cursor : 'pointer'}} onClick={() => {toggleSignin(false)}}>  Register Yourself
                         </a> 
                     </Typography>

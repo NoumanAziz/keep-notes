@@ -147,7 +147,7 @@ const NotesCard = ({trash , note}) => {
                             <div className = {classes.extraCardDiv} onClick = {openModal}></div>
 
                             {/* <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>{ dispatch(deleteNotes(id)) ; dispatch(restore(note))}}> */}
-                            <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>dispatch(updateNote(id , {deleted : false , createdAt : new Date () ,  editedAt : new Date()}))}>
+                            <IconButton aria-label="settings"   className = {classes.cardIconButton} onClick = {()=>dispatch(updateNote(id , {deleted : false , createdAt : new Date () ,  editedAt : new Date()} , 'restore'))}>
                               <RestoreFromTrashIcon fontSize = 'small' />  
                             </IconButton>
                               
@@ -172,7 +172,7 @@ const NotesCard = ({trash , note}) => {
                               
                             {/* <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = {()=>{ dispatch(delfromNotes(note)) ; dispatch(addTrash(note)) }} > */}
                            
-                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = { ()=>dispatch(updateNote(id , {deleted : true})) } >
+                            <IconButton aria-label="settings" className = {classes.cardIconButton} onClick = { ()=>dispatch(updateNote(id , {deleted : true} , 'yes' )) } >
                               <DeleteIcon fontSize = 'small'/>
                             </IconButton>
                           </div>

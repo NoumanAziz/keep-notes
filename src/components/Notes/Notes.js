@@ -42,7 +42,7 @@ const Notes = ({match}) => {
 
 
     useEffect(() => {
-      console.log('change param' , param)
+    
       if ( param === 'pinned') {
               setPinned(true)
               setTrash(false)

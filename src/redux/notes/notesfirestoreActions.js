@@ -1,3 +1,5 @@
+import { openSnackbar } from "../snackbarReducer/snackbarReducerAction";
+
 export const createNotes = (note)=>{
     return (dispatch , getstate , { getFirebase })=>{
         const authorId = getstate().firebase.auth.uid;
@@ -11,7 +13,7 @@ export const createNotes = (note)=>{
             editedAt : new Date()
         })
         
-        .then(()=>console.log('successfully added note'))
+        .then(()=>dispatch(openSnackbar('Note added')))
         .catch(err=>console.log('note not added error occured', err))
     }
 }
@@ -27,13 +29,13 @@ export const delfromNotes = (note)=>{
             
         
         
-        .then(()=>console.log('successfully deleted note from notes'))
+        .then(()=>dispatch(openSnackbar('Note deleted')))
         .catch(err=>console.log('note not deleted from notes error occured', err))
     }
 }
 
 
-export const updateNote = (id , update )=>{
+export const updateNote = (id , update , trash )=>{
     return (dispatch , getstate , { getFirebase })=>{
         const authorId = getstate().firebase.auth.uid;
         
@@ -45,7 +47,14 @@ export const updateNote = (id , update )=>{
         
        
         
-        .then(()=>console.log('successfully updated'))
+        .then(()=> {
+            
+            console.log('successfully updated')
+            update.pinned === true  && dispatch(openSnackbar('Note pinned')) 
+            trash === 'yes' && dispatch(openSnackbar('Note trashed')) 
+            trash === 'restore' && dispatch(openSnackbar('Note restored')) 
+                })
+
         .catch(err=>console.log('not updated', err))
     }
 }

@@ -1,11 +1,13 @@
 import React from 'react'
 import { TextField, makeStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './inputForm.css'
+import { loginSuccess } from '../../redux/authReducer/authAction';
 
 
 const InputForm = ({error , type , handleChange , label , name , value, formValidate , errorNull, ...props}) =>{
   let nameError = `${name}Error`
+  const dispatch = useDispatch();
 const theme = useSelector(state => state.theme.currentTheme)
 const validate  = (name ,value)=>{
         
@@ -78,7 +80,7 @@ const validate  = (name ,value)=>{
     const classes = useStylesReddit();
         return (
             <>
-            <div className = {theme == 'dark' ? 'auto-form': '' }>
+            <div className = {theme == 'dark' ? 'auto-form': '' } onClick = {()=>dispatch(loginSuccess())}>
                 <TextField InputProps={{ classes}}
                 label = {label}  
                 type = {type} 
@@ -87,7 +89,7 @@ const validate  = (name ,value)=>{
                 onChange ={handleChange} 
                 onBlur={()=>validate(name , value)}
                 error = {error ? true : false}
-                helperText = {error}
+                helperText = {props.signup == 'true' && !error  ? '* combination of number, capital & a small letter (7-32 figures)' : error } 
                 fullWidth  
                 required
                 variant= "outlined" 

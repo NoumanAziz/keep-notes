@@ -4,6 +4,7 @@ import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import themeReducer from './themeReducer/themeReducer';
 import mobLayoutReducer from './mobReducer/mobLayoutReducer';
+import snackbarReducer from './snackbarReducer/snackbarReducer';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     auth : authReducer,
     theme : themeReducer,
     mobLayout : mobLayoutReducer,
+    snackbar : snackbarReducer,
    
 })
 

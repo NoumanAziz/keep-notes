@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import { Route, Switch, Redirect} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -9,12 +9,34 @@ import AuthIsLoaded from './PrivateLinks/AuthLoaded';
 import { themeToggler } from './redux/themeReducer/themeReducerActions';
 import Notes from './components/Notes/Notes';
 import SecuredLinks from './PrivateLinks/SecuredLinks';
-
+import NoteSnackbar from './components/Snakbar/NoteSnackbar';
+import { openSnackbar } from './redux/snackbarReducer/snackbarReducerAction';
+import useOnlineStatus from '@rehooks/online-status';
 
 const App = () => {
+
  
+
+
   const darkThemeSet = useSelector(state=>state.theme.currentTheme)
   const dispatch = useDispatch();
+
+
+  const status = useOnlineStatus();
+  if (!status) {dispatch(openSnackbar('Ofline !!!'))}
+  
+  const profileName = useSelector(state=>state.firebase.profile.name)  
+  useEffect(()=>{
+  if (profileName && status) {
+     
+    dispatch(openSnackbar(`Welcome  ${profileName} `))
+    } 
+  } , [profileName])
+
+
+
+
+
 
   const theme = React.useMemo(
     () =>
@@ -36,7 +58,7 @@ const App = () => {
 
           background : {
             paper :  darkThemeSet === 'dark'?"#27282a":"#f9f9f6" , //color of menu 
-            default : darkThemeSet === 'dark'&& "#1f1f22",//background
+            default : darkThemeSet === 'dark' ? "#1f1f22" : '#ffffff',//background
             modal :  darkThemeSet === 'dark'? "#1d1d1f5d":"#ffffff52" ,
            
             modalpaper :  darkThemeSet === 'dark'? "#1d1d1f":"#f9f9f6e1" ,//modalpaper color
@@ -87,7 +109,6 @@ const App = () => {
       dispatch(themeToggler(themeSet))
 
   }
-  
 
   return (
     <ThemeProvider theme={theme}>
@@ -112,6 +133,7 @@ const App = () => {
 
     
     </Switch>
+    <NoteSnackbar/>
  
     </AuthIsLoaded>
 

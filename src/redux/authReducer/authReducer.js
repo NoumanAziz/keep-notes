@@ -12,12 +12,7 @@ const authReducer = (state = ISTATE , action)=>{
                 ...state,
                 authErr : null
             }
-        case authActionType.LOGIN_ERR :
-            console.log('login failed' , action.payload)
-            return {
-                ...state,
-                authErr : 'Login Failed'
-            }  
+      
         case authActionType.SIGNOUT_SUCCESS :
             console.log('Sign-out , success')
             return {
@@ -30,12 +25,29 @@ const authReducer = (state = ISTATE , action)=>{
                 ...state,
                 authErr : null
             }
-        case authActionType.SIGNUP_ERR :
-        console.log('SignUp  Errr' , action.payload)
-        return {
-            ...state,
-            authErr : 'Signup failed'
-        }
+    
+            case authActionType.LOGIN_ERR :
+                console.log('login failed' , action.payload)
+                if (action.payload == 'auth/user-not-found')
+                return {
+                    ...state,
+                    authErr : 'Email is not registered'
+                }  
+                if (action.payload == 'auth/wrong-password')
+                return {
+                    ...state,
+                    authErr : 'Wrong password'
+                }  
+                
+          
+            case authActionType.SIGNUP_ERR :
+            console.log('SignUp  Errr' , action.payload)
+            if(action.payload == 'auth/email-already-in-use')
+            return {
+                ...state,
+                authErr : 'This email is already associated with the existing account'
+            }
+    
 
 
         default:

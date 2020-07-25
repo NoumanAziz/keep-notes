@@ -1,5 +1,6 @@
 
 import { authActionType } from "./authActionType";
+import { openSnackbar } from "../snackbarReducer/snackbarReducerAction";
 
 
 
@@ -21,7 +22,7 @@ export const googleSignin  = () => {
         console.log('response after signin from google' , response)
  
         firestore.collection('users').doc(response.user.uid).get().then(res => {
-            console.log('snapshot', res)
+            // const  name  = response.user.displayName ;
         !res.exists && (
             
                         firestore.collection('users').doc(response.user.uid)
@@ -35,6 +36,7 @@ export const googleSignin  = () => {
                         )
                 }
             )
+            
         })
             .then(()=>dispatch(loginSuccess()))
             .catch(err=>dispatch(loginFailed(err)))
@@ -43,7 +45,7 @@ export const googleSignin  = () => {
 
     
 export const signUp = (creds) => {
-    console.log ('inside signup' ,creds)
+ 
     return (dispatch , getState , { getFirebase })=>{
         const firebase  = getFirebase();
         const firestore = getFirebase().firestore()
@@ -59,22 +61,21 @@ export const signUp = (creds) => {
                 createdAt : new Date()
             })
             )
-           
             .then(()=>dispatch(signupSuccess()))
-            .catch(err=>dispatch(signupFailed(err)))
+            .catch(err=>dispatch(signupFailed(err.code)))
     }
 }
  
 
 export const signIn = (creds) => {
+   
     return (dispatch , getState , { getFirebase })=>{
         const firebase  = getFirebase();
 
         firebase
         .auth()
         .signInWithEmailAndPassword(creds.email , creds.password)
-            .then(() =>dispatch(loginSuccess()))
-            .catch(err=>dispatch(loginFailed(err)))
+            .catch(err=>dispatch(loginFailed(err.code)))
     }
 }
  
@@ -86,32 +87,33 @@ export const signOut = () => {
         firebase
         .auth()
         .signOut()
-        .then(() =>dispatch(signoutSuccesss()))
+        .then(() =>dispatch(openSnackbar(`Signed Out !!!`)))
     }
 }
 
 
 
 
-export const loginSuccess =()=> ({
-    type : authActionType.LOGIN_SUCCESS
-})
 
-export const loginFailed =(err)=> ({
+export const loginFailed =(erorr)=> ({
     type : authActionType.LOGIN_ERR,
-    payload : err
-})
-
-export const signoutSuccesss =()=> ({
-    type : authActionType.SIGNOUT_SUCCESS
-})
-
-
-export const signupSuccess =()=> ({
-    type : authActionType.SIGNUP_SUCCESS
+    payload : erorr
 })
 
 export const signupFailed =(err)=> ({
     type : authActionType.SIGNUP_ERR,
     payload : err
+})
+
+
+
+export const loginSuccess =()=> ({
+    type : authActionType.LOGIN_SUCCESS
+})
+export const signupSuccess =()=> ({
+    type : authActionType.SIGNUP_SUCCESS
+})
+
+export const signoutSuccesss =()=> ({
+    type : authActionType.SIGNOUT_SUCCESS
 })

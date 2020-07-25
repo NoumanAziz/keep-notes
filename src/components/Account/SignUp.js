@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import InputForm from './InputForm';
 import { signUp } from '../../redux/authReducer/authAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Typography, Button } from '@material-ui/core';
 import { formStyles } from './AccountStyles';
 
 
 
-// import Styles from './AccountStyles';
+
 
 
 
@@ -19,7 +19,7 @@ const SignUp = ({toggleSignin}) => {
         email : '',
         password : '',
         confirmPassword : '',
-        photoURL: '',
+       
         gender:'',
 
         nameError : '',
@@ -30,48 +30,44 @@ const SignUp = ({toggleSignin}) => {
         validate : true,
     })
         
-    const{name ,email ,password, confirmPassword ,photoURL, gender, nameError , emailError , passwordError ,confirmPasswordError } = form;
+    const{name ,email ,password, confirmPassword , gender, nameError , emailError , passwordError ,confirmPasswordError } = form;
     const dispatch = useDispatch();
-    
+    const authErr = useSelector(state => state.auth.authErr)
 
     const handleSubmit = (event) => {
-      
+      let photoURL = ''
     event.preventDefault();
     if( nameError || emailError || passwordError || confirmPasswordError){
         alert('invalid credentials')
-    } else{
+    } else {
         switch (gender) {
 
             case 'male':
-             setform({
-                 ...form,
-                 photoURL :'https://st3.depositphotos.com/1007566/13129/v/1600/depositphotos_131295836-stock-illustration-businessman-character-avatar-icon.jpg'
-                })
+             
+              photoURL = 'https://st3.depositphotos.com/1007566/13129/v/1600/depositphotos_131295836-stock-illustration-businessman-character-avatar-icon.jpg'
+              dispatch(signUp({ photoURL , email , password , name }))
+              
                 break;
 
             case 'female':
-             setform({ 
-                 ...form,
-                 photoURL:'https://2atstartup.com.au/wp-content/uploads/2019/05/girl-avatar.png'
-                })
+            
+                photoURL = 'https://2atstartup.com.au/wp-content/uploads/2019/05/girl-avatar.png'
+                dispatch(signUp({ photoURL , email , password , name }))
+                
             break;
 
             default:
                 break;
 
         }
-
+      
     }
 
 
         
     
 }
-    useEffect (() => {
-
-        dispatch(signUp(form))
-
-    }, [photoURL])
+ 
 
 
 
@@ -130,7 +126,7 @@ const SignUp = ({toggleSignin}) => {
                         error = {nameError}
                         formValidate = {validate}
                         errorNull = {errorNull}
-                        autoFocus
+                        
                     /> 
                            
                     {/* <div className = {`${genderCheck? 'gender-error' : null } gender`} >            */}
@@ -169,7 +165,9 @@ const SignUp = ({toggleSignin}) => {
                         error = {passwordError}
                         formValidate = {validate}
                         errorNull = {errorNull}
+                        signup = 'true'
                     /> 
+                   
                     <InputForm
                         type = 'password'
                         name = 'confirmPassword'
@@ -181,9 +179,7 @@ const SignUp = ({toggleSignin}) => {
                         errorNull = {errorNull}
                     /> 
 
-                    {/* <div>
-                        <button onSubmit = {(e)=>this.handleSubmit(e)} className="btn pink lighten-1 z-depth-0">SignUp</button>
-                    </div> */}
+                    {authErr ? <span style = {{ color : 'red' , margin : '0 0 0 4px' , fontStyle : 'italic'}} >{authErr}</span> : null}
 
                     <Button fullWidth variant="contained" type="submit" style={{backgroundColor:'#08adad' , color : 'white'}} >Register Yourself</Button>
 

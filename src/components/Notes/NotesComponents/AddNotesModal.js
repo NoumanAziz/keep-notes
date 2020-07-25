@@ -102,7 +102,7 @@ const AddNotesModal = ({open , closeModal, noteTitle , noteDiscrp, notePinned , 
 
 const deleteFromNotes = () => {
   closeModal() ;
-  dispatch(updateNote(id , {deleted:true}));
+  dispatch(updateNote(id , {deleted : true} , 'yes' ));
 }
 
   const handleChange = (event) => {

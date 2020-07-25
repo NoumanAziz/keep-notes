@@ -36,11 +36,13 @@ const drawerOpener = open || mouseOpen ? true : false
       style  = {{border : 'none'}}
       onMouseLeave = {handleMouseDrawerClose}
         variant="permanent"
-        className={clsx(classes.drawer, {
+        className={clsx(classes.drawer, classes.drwaerChild, {
           [classes.drawerOpen]: drawerOpener ,
           [classes.drawerClose]: !drawerOpener ,
         })}
         classes={{
+          paperAnchorDockedLeft : classes.drwaerBorder,
+          paperAnchorLeft : classes.drwaerBorder,
           paper: clsx(   classes.drwaerBorder, {
             [classes.drawerOpen]: drawerOpener ,
             [classes.drawerClose]: !drawerOpener ,

@@ -201,6 +201,14 @@ export const useStyles = makeStyles((theme) => ({
       border : 'none',
   },
 
+  drwaerChild : {
+    '& > * + *': {
+        
+      border : 'none',
+      
+    },
+  },
+
   drawerOpen: {
     
     width: 200,
@@ -213,6 +221,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')] : {
       width : 170,
       },
+    
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -231,6 +240,11 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')] : {
       width: theme.spacing(0),
       border : '#00000000',
+  },
+  '& > * + *': {
+        
+    border : 'none',
+    
   },
   },
   extraIcon:{

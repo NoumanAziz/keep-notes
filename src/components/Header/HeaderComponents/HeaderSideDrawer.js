@@ -33,6 +33,7 @@ const drawerOpener = open || mouseOpen ? true : false
    
     
       <Drawer
+      style  = {{border : 'none'}}
       onMouseLeave = {handleMouseDrawerClose}
         variant="permanent"
         className={clsx(classes.drawer, {

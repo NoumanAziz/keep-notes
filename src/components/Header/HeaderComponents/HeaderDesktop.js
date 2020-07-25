@@ -85,7 +85,7 @@ const HeaderDesktop = ({setTheme}) => {
                       onClick={handleProfileMenuOpen}
                       color="inherit"
                   >
-                    <Avatar  classes = {{img : classes.small , root : classes.small}}    src={profile.photoURL}  alt={profile.name} />
+                    <Avatar  classes = {{img : classes.small , root : classes.small}}    src={profile.photoURL}  alt={profile.name}  style = {{ width : '30px' , height : '30px' , borderRaduius : '50%'  }}/>
                     {/* <AccountCircle /> */}
                   </IconButton> 
             :  null}

@@ -259,16 +259,16 @@ export const useStyles = makeStyles((theme) => ({
     
   },
   '& div': {
-    border : '1px solid #00000000'
+    border : '1px solid #00000000',
      },
   },
   extraIcon:{
     [theme.breakpoints.up('xs')]: {
-      margin : '0px 0px 19.5px 0px ',
+      margin : '0px 0px 18.5px 0px ',
     },
 
     [theme.breakpoints.down('xs')]: {
-      margin : '0px 0px 12px 0px ',
+      margin : '0px 0px 11px 0px ',
     },
 
   },

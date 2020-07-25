@@ -195,10 +195,16 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')] : {
       width : 200,
       },
+      '& div': {
+       border : '1px solid #00000000'
+        },
   },
 
   drwaerBorder : {
       border : 'none',
+      '& div': {
+        border : '1px solid #00000000'
+         },
   },
 
   drwaerChild : {
@@ -207,6 +213,9 @@ export const useStyles = makeStyles((theme) => ({
       border : 'none',
       
     },
+    '& div': {
+      border : '1px solid #00000000'
+       },
   },
 
   drawerOpen: {
@@ -221,6 +230,9 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')] : {
       width : 170,
       },
+      '& div': {
+        border : '1px solid #00000000'
+         },
     
   },
   drawerClose: {
@@ -246,6 +258,9 @@ export const useStyles = makeStyles((theme) => ({
     border : 'none',
     
   },
+  '& div': {
+    border : '1px solid #00000000'
+     },
   },
   extraIcon:{
     [theme.breakpoints.up('xs')]: {

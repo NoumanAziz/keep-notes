@@ -33,11 +33,11 @@ const rrfProps = {
 ReactDOM.render(
     <Provider store = {store}>
         <PersistGate loading={null} persistor={persistor}>
-            <HashRouter basename = "keep-notes">
+            <BrowserRouter >
                 <ReactReduxFirebaseProvider {...rrfProps}>
                     <App/>
                 </ReactReduxFirebaseProvider>
-            </HashRouter>
+            </BrowserRouter>
         </PersistGate>
     </Provider>
     , document.getElementById('root'));
